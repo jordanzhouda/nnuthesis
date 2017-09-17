@@ -5,6 +5,7 @@
 \ctexset{
 	contentsname = {目\quad 录},
 	chapter = {
+		beforeskip = 0pt,
 		name = {第,章},
 		nameformat = \zihao{3}\bfseries,
 		number = \Chinese{chapter},
@@ -30,7 +31,8 @@
 \usepackage{lipsum}
 \usepackage[bindingoffset=.5cm,centering,includeheadfoot,margin=2.5cm]{geometry}
 \usepackage{fancyhdr}
-
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
 
 %%%% 中文字体 %%%%%%%%%
 \setCJKmainfont[
