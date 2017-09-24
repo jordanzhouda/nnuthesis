@@ -25,14 +25,20 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
 \usepackage{ulem}
-\usepackage[colorlinks,linkcolor=blue,bookmarks=true]{hyperref}
 \usepackage{pdfpages}
 \usepackage{lipsum}
+%%%% 页面设置 %%%%%%%%%%%%%%%%%%%%%%
 \usepackage[bindingoffset=.5cm,centering,includeheadfoot,margin=2.5cm]{geometry}
 \usepackage{fancyhdr}
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-
+	\pagestyle{fancy}
+	\fancyhead[LE,RO]{\thepage}
+	\fancyhead[RE]{\textsl{\nouppercase{\leftmark}}}
+	\fancyhead[LO]{\textsl{\nouppercase{\rightmark}}}
+	\fancyfoot{}
+	%\renewcommand{\headrulewidth}{0pt}
+\renewcommand\sectionmark[1]{%
+	\markright{\CTEXifname{\CTEXthesection\quad}{}#1}}
+\usepackage[colorlinks,linkcolor=blue,bookmarks=true]{hyperref}
 %%%% 字体 %%%%%%%%%
 \usepackage{lmodern}
 \setCJKmainfont[
