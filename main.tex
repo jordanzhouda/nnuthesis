@@ -1,23 +1,35 @@
 % 使用 xelatex 编译
-%\documentclass[UTF8,a4paper,zihao=-4]{ctexrep}
 \documentclass[UTF8,a4paper,twoside,zihao=-4]{ctexrep}
 %%%% 文档类设置 %%%%%%%%
 \ctexset{
 	contentsname = {目\quad 录},
 	chapter = {
 		beforeskip = 0pt,
+		afterskip = 20pt,
 		name = {第,章},
 		nameformat = \zihao{3}\bfseries,
 		number = \Chinese{chapter},
 		numberformat = \zihao{3}\bfseries,
 		titleformat = \zihao{3}\bfseries,
-		fixskip = true
+		fixskip = true,
+		%afterindent = false
 		        },
 	section = {
+		beforeskip = \ccwd,
+		afterskip =1ex plus 0.2ex,
 		format = \raggedright,
-		nameformat = \zihao{-3}\bfseries,
-		numberformat = \zihao{-3}\bfseries,
-		titleformat = \zihao{-3}\bfseries
+		nameformat = \zihao{4}\bfseries,
+		numberformat = \zihao{4}\bfseries,
+		titleformat = \zihao{4}\bfseries,
+		%afterindent = false
+			},
+	subsection = {
+		beforeskip =\ccwd,
+		afterskip = 0.5ex plus 0.1ex,
+		format = \raggedright,
+		nameformat = \zihao{-4}\bfseries,
+		numberformat = \zihao{-4}\bfseries,
+		titleformat = \zihao{-4}\bfseries
 			}
 	    }
 
@@ -29,6 +41,7 @@
 \usepackage{lipsum}
 %%%% 页面设置 %%%%%%%%%%%%%%%%%%%%%%
 \usepackage[bindingoffset=.5cm,centering,includeheadfoot,margin=2.5cm]{geometry}
+\setlength\parskip{0pt}
 \usepackage{fancyhdr}
 	\pagestyle{fancy}
 	\fancyhead[LE,RO]{\thepage}
@@ -55,7 +68,7 @@
 \include{abstract}
 \tableofcontents\newpage\mbox{}\thispagestyle{empty}\newpage
 \clearpage\pagenumbering{arabic}
-\chapter{中文排版}
+\chapter{绪论}
 来一回《三国演义》
 \section{宴桃园豪杰三结义\quad 斩黄巾英雄首立功}
 话说天下大势，分久必合，合久必分。周末七国分争，并入于秦。及秦灭之后，楚、汉分争，又并入于汉。汉朝自高祖斩白蛇而起义，一统天下，后来光武中兴，传至献帝，遂分为三国。推其致乱之由，殆始于桓、灵二帝。桓帝禁锢善类，崇信宦官。及
@@ -88,7 +101,7 @@ Just some nonsense\dots
 		   &=\int^{\infty}_{1}\left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right) dx
 \end{aligned}
 \]
-\chapter{Conclusion}
+\chapter{结语}
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{参考文献}
 \bibitem{LiuLaTeX}
