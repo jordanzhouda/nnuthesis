@@ -75,15 +75,17 @@
 %%%% 页面设置 %%%%%%%%%%%%%%%%%%%%%%
 \usepackage[bindingoffset=.5cm,centering,includeheadfoot,margin=2.5cm,headsep=1em]{geometry}
 \setlength\parskip{0pt}
-\usepackage{fancyhdr}
-	\pagestyle{fancy}
-	\fancyhead[LE,RO]{\thepage}
-	\fancyhead[RE]{\kaishu\nouppercase{\leftmark}}
-	\fancyhead[LO]{\kaishu\nouppercase{\rightmark}}
-	\fancyfoot{}
-	%\renewcommand{\headrulewidth}{0pt}
+\usepackage{fancyhdr}\pagestyle{fancy}
+\renewcommand\chaptermark[1]{%
+	\markboth{\CTEXthechapter\quad #1}{}}
 \renewcommand\sectionmark[1]{%
-	\markright{\CTEXifname{\CTEXthesection\quad}{}#1}}
+	\markright{\CTEXthesection\quad #1}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textsl{\nouppercase{\leftmark}}}
+\fancyhead[LO]{\textsl{\nouppercase{\rightmark}}}
+%\renewcommand{\headrulewidth}{0pt}
+	
 \usepackage[colorlinks,linkcolor=blue,bookmarks=true]{hyperref}
 %%%% 字体 %%%%%%%%%
 \usepackage{lmodern}
@@ -102,6 +104,7 @@
 \begin{document}
 \includepdf{cover/cover.pdf} %%%%% 封面 %%%%%%%%%%%%
 %%%%%%% 中英文摘要 %%%%%%%%%%%%%%%%
+\pagenumbering{roman}
 \include{abstract_zh}
 \include{abstract}
 \tableofcontents\newpage\mbox{}\thispagestyle{empty}\newpage
