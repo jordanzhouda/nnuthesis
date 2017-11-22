@@ -42,6 +42,8 @@
 \usepackage{lipsum}
 \usepackage{booktabs}
 \usepackage{enumerate }
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,bookmarks=true]{hyperref}
+\usepackage[round]{natbib}
 %%%%% 定理环境 %%%%%%%%%
 \usepackage[thmmarks]{ntheorem}
 {
@@ -86,7 +88,7 @@
 \fancyhead[LO]{\textsl{\nouppercase{\rightmark}}}
 %\renewcommand{\headrulewidth}{0pt}
 	
-\usepackage[colorlinks,linkcolor=blue,bookmarks=true]{hyperref}
+	
 %%%% 字体 %%%%%%%%%
 \usepackage{lmodern}
 \setCJKmainfont[
@@ -102,6 +104,7 @@
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
+\bibliographystyle{plainnat}
 \includepdf{cover/cover.pdf} %%%%% 封面 %%%%%%%%%%%%
 %%%%%%% 中英文摘要 %%%%%%%%%%%%%%%%
 \pagenumbering{roman}
@@ -152,6 +155,7 @@
 南京师范大学一贯重视与海外的交流与合作，坚持国际化发展战略。学校是改革开放以后全国首批对外开放大学，是国家设立的来华留学示范基地、对外汉语教学基地、首批华文教育基地和港澳台地区幼儿教育培训基地；设有联合国教科文组织国际农村教育研究与培训中心南京基地、法国文化研究中心及南京法语培训中心、意大利文化研究中心等国际性研究和教学组织。在美国北卡罗来那州立大学、佩斯大学和法国阿尔萨斯大区建有3所孔子学院。与13所海外大学举办中外合作办学项目，学生海外学习计划学校49所。与世界上33个国家和地区的192所大学建立了校际交流关系，聘请外国专家400余人，其中长期专家56人。有来自133个国家和地区的留学生1600余人\dots
 
 \chapter{公式排版}
+微积分已有三百多年的历史，经过跨越好几个世纪的数学巨匠们的精雕细琢，千锤百炼，已经形成了一个完整的、精密的庞大知识宝库\citep{CS2016}.
 \section{单调有界定理}
 \begin{definition}
 如果数列满足
@@ -195,13 +199,11 @@ Just some nonsense\dots
 \section{Beautiful Fonts}
 \lipsum
 
-\chapter{结语}
 \begin{thebibliography}{99}
 \addcontentsline{toc}{chapter}{参考文献}
-\bibitem{LiuLaTeX}
-	刘海洋, 《\LaTeX 入门》, 电子工业出版社, 2013.
-\bibitem{GGMM}
-	George Gr\"{a}tzer, \emph{More Math Into \LaTeX}, Springer, 2016.
-\bibitem{CS}常庚哲, 史济怀, 《数学分析教程》, 中国科技大学出版社, 2016.
+
+\bibitem[常庚哲, 史济怀(2016)]{CS2016}
+常庚哲, 史济怀, 2016, 《数学分析教程(上册)第三版》[M]. 合肥: 中国科学技术大学出版社. 
 \end{thebibliography}
+
 \end{document}
