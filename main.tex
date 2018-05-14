@@ -104,8 +104,8 @@
 \includepdf{cover/cover.pdf} %%%%% 封面 %%%%%%%%%%%%
 %%%%%%% 中英文摘要 %%%%%%%%%%%%%%%%
 \pagenumbering{roman}
-\include{abstract_zh}
-\include{abstract}
+\include{docs/abstract_zh}
+\include{docs/abstract}
 \tableofcontents\newpage\mbox{}\thispagestyle{empty}\newpage
 \clearpage\pagenumbering{arabic}
 \chapter{绪论}
@@ -195,11 +195,6 @@ Just some nonsense\dots
 \section{Beautiful Fonts}
 \lipsum
 
-\begin{thebibliography}{99}
-\addcontentsline{toc}{chapter}{参考文献}
-
-\bibitem[常庚哲, 史济怀(2016)]{CS2016}
-常庚哲, 史济怀, 2016, 《数学分析教程(上册)第三版》[M]. 合肥: 中国科学技术大学出版社. 
-\end{thebibliography}
+\include{docs/refs}
 
 \end{document}
