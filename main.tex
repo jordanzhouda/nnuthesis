@@ -1,14 +1,17 @@
 % 使用 xelatex 编译
-\documentclass[UTF8,a4paper,twoside,zihao=-4]{ctexrep}
+\documentclass[UTF8,a4paper,twoside,zihao=-4,leqno]{ctexrep}
 %%%% 文档类设置 %%%%%%%%
 \ctexset{
-	contentsname = {目\quad 录},
+	contentsname = {Contents},
+	figurename = {Figure},
+	tablename = {Table},
+	bibname = {References},
 	chapter = {
 		beforeskip = 0pt,
 		afterskip = 20pt,
-		name = {第,章},
+		name = {Chapter\ },
 		nameformat = \zihao{3}\bfseries,
-		number = \Chinese{chapter},
+		number = \Roman{chapter},
 		numberformat = \zihao{3}\bfseries,
 		titleformat = \zihao{3}\bfseries,
 		fixskip = true,
@@ -36,14 +39,20 @@
 %%%% 宏包 %%%%%%%%%%%
 \usepackage{amsmath,amssymb,amsfonts,mathrsfs}
 \usepackage{graphicx}
-\usepackage{tikz}
 \usepackage{ulem}
 \usepackage{pdfpages}
 \usepackage{lipsum}
 \usepackage{booktabs}
+\usepackage{array,tabularx,longtable}
+	\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\usepackage{multirow,listings}
 \usepackage{enumerate }
-\usepackage[colorlinks,linkcolor=blue,citecolor=blue,bookmarks=true,bookmarksnumbered=true]{hyperref}
+\usepackage{algorithm,algpseudocode}
+\usepackage{tikz}
+\usepackage{tikz-qtree,tikz-qtree-compat}
+	\usetikzlibrary{arrows}
 \usepackage[round]{natbib}
+\usepackage{siunitx}
 %%%%% 定理环境 %%%%%%%%%
 \usepackage[thmmarks]{ntheorem}
 {
@@ -51,23 +60,25 @@
   \theoremheaderfont{\indent\bfseries}
   \theorembodyfont{\normalfont}
   \theoremsymbol{\ensuremath{\Box}}
-  \newtheorem{proof}{证明}
+  \newtheorem{proof}{Proof}
 }
 {
-  \theoremheaderfont{\indent\bfseries}
+  \theoremheaderfont{\noindent\bfseries}
   \theorembodyfont{\normalfont}
-  \newtheorem{theorem}{定理}[chapter]
-  \newtheorem{lemma}{引理}[chapter]
-  \newtheorem{definition}{定义}[chapter]
+  \newtheorem{theorem}{Theorem}[chapter]
+  \newtheorem{lemma}{Lemma}[chapter]
+  \newtheorem{definition}{Definition}[chapter]
+  \newtheorem{axiom}{Axiom}[chapter]
+  \newtheorem{corollary}{Corollary}[chapter]
 }
 %%%%%% 图表标题设置 %%%%%%%%%%%%%%%
 \usepackage{caption}
-\DeclareCaptionLabelFormat{mylabel}{{\xeCJKsetup{CJKecglue={\hskip 0pt}}#1#2}}
+%\DeclareCaptionLabelFormat{mylabel}{{\xeCJKsetup{CJKecglue={\hskip 0pt}}#1#2}}
 \captionsetup{
 		font= small,
 		labelfont = bf,
 		labelsep = space,
-		labelformat = mylabel
+		%labelformat = mylabel
 			}
 \makeatletter
 \renewcommand{\thefigure}{\ifnum \c@chapter>\z@ \thechapter-\fi \@arabic\c@figure}
@@ -75,7 +86,7 @@
 \makeatother
 
 %%%% 页面设置 %%%%%%%%%%%%%%%%%%%%%%
-\usepackage[bindingoffset=.5cm,centering,includeheadfoot,margin=2.5cm,headsep=1em]{geometry}
+\usepackage[bindingoffset=.5cm,centering,includeheadfoot,margin=2.5cm,headsep=1.5em]{geometry}
 \setlength\parskip{0pt}
 \usepackage{fancyhdr}\pagestyle{fancy}
 \renewcommand\chaptermark[1]{%
@@ -87,32 +98,56 @@
 \fancyhead[RE]{\textsl{\nouppercase{\leftmark}}}
 \fancyhead[LO]{\textsl{\nouppercase{\rightmark}}}
 %\renewcommand{\headrulewidth}{0pt}
-	
-	
+
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,bookmarks=true,bookmarksnumbered=true]{hyperref}
+\usepackage{pdflscape}
 %%%% 字体 %%%%%%%%%
-% xelatex 默认字体为Latin Modern
+\usepackage{lmodern}
+\setCJKmainfont[
+	BoldFont=AdobeHeitiStd-Regular.otf,
+	ItalicFont=AdobeKaitiStd-Regular.otf
+				]{simsun.ttc}
 %%%%% 自定义命令 %%%%%%%%%%%%
-\newcommand{\nn}{\mathbf{N}^\ast}
+\renewcommand{\bmod}{\ensuremath{\ \mathbf{mod}\ }}
+\renewcommand{\div}{\ensuremath{\ \mathbf{div}\ }}
+\newcommand{\remark}{\noindent\textit{\bfseries Remark:\ }}
+\newcommand{\nequiv}{\not\equiv}
+\renewcommand{\proof}{\noindent\textit{Proof:\ }}
+\renewcommand{\qed}{\ensuremath{\hfill\Box}}
+\renewcommand{\gets}{:=}
+\newcommand{\TO}{\ensuremath{\ \textbf{to}\ }}
+\newcommand{\return}{\textbf{return\ }}
 \renewcommand{\leq}{\leqslant}
 \renewcommand{\geq}{\geqslant}
-\renewcommand{\ref}{\autoref}
-\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\lcm}{\ensuremath{\text{lcm}}}
+\newcommand{\algorithmautorefname}{Algorithm}
+\newcommand{\lemmaautorefname}{Lemma}
+\newcommand\sub[1]{\ensuremath{_{#1}}}
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \bibliographystyle{plainnat}
-%%%%%%%%% 封面 %%%%%%%%%%%%
-%\includepdf{cover/cover.pdf}
-%%%%%%% 中英文摘要 %%%%%%%%%%%%%%%%
+%\includepdf{cover/cover.pdf} %%%%% 封面 %%%%%%%%%%%%
+\newpage
+\include{docs/titlepage}
+\newpage\mbox{}\thispagestyle{empty}\newpage
 \pagenumbering{roman}
 \include{docs/acknowledgement}
-\include{docs/abstract_zh}
 \include{docs/abstract}
-\tableofcontents\newpage\mbox{}\thispagestyle{empty}\newpage
+\include{docs/abstract_zh}
+\newpage\mbox{}\thispagestyle{empty}\newpage
+\tableofcontents\thispagestyle{empty}
+\newpage\mbox{}\thispagestyle{empty}\newpage
 \clearpage\pagenumbering{arabic}
-\include{docs/chap1}
-\include{docs/chap2}
-\include{docs/chap3}
-\include{docs/refs}
 
+%%%%%%%%%% 正文 %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{docs/Intro}
+\include{docs/LR}
+\include{docs/study}
+\include{docs/conclusion}
+\include{docs/bib}
 \end{document}
